@@ -7,7 +7,7 @@
 <meta name="description" content="Hakeem is an interactive clinical case simulator for medical students and doctors: take the history, examine, stabilise, order tests, treat and make the diagnosis — then get scored.">
 <meta name="theme-color" content="#0d1230">
 <meta property="og:title" content="Hakeem — Clinical Case Simulator">
-<meta property="og:description" content="130 interactive clinical cases across 11 specialties. Practise real decisions, get instant feedback.">
+<meta property="og:description" content="Over 250 interactive clinical cases across 11 specialties, with an article for every case. Practise real decisions, get instant feedback.">
 <meta property="og:image" content="https://hakeemsim.com/assets/icon-512.png">
 <script>
   (function () { var t = null; try { t = localStorage.getItem('hk_theme'); } catch (e) { }
@@ -116,20 +116,15 @@
   .feature { background:var(--card); border:1px solid var(--soft); border-radius:18px; padding:22px; box-shadow:var(--shadow); }
   .feature h3 { margin:8px 0 6px; font-size:17px; font-weight:600; } .feature p { margin:0; color:var(--muted); font-size:14.5px; }
 
-  /* pricing */
-  .plans { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; align-items:stretch; }
-  .plan { background:var(--card); box-shadow:var(--shadow); border:1px solid var(--soft); border-radius:22px; padding:26px; display:flex; flex-direction:column; }
-  .plan.best { border-color:rgba(255,122,61,.55); box-shadow:0 0 0 1px rgba(255,122,61,.25), 0 18px 50px rgba(255,80,50,.18); position:relative; }
-  .badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(90deg,#ff8a3d,#ff4d5e); color:#fff;
-           font-size:12px; font-weight:700; letter-spacing:.08em; padding:5px 12px; border-radius:999px; white-space:nowrap; }
-  .plan h3 { margin:0; font-size:20px; font-weight:600; }
-  .price { margin:16px 0 4px; font-family:"Exo 2"; font-size:34px; font-weight:600; line-height:1.1; }
-  .price small { font-size:15px; color:var(--muted); font-weight:400; }
-  .alt { color:var(--amber); font-weight:600; font-size:15px; }
-  .plan ul { list-style:none; padding:0; margin:18px 0 22px; color:var(--lead); font-size:14.5px; flex:1; }
-  .plan li { padding:6px 0 6px 24px; position:relative; } .plan li::before { content:"✓"; position:absolute; left:0; color:var(--ember); font-weight:700; }
-  .how { margin-top:26px; background:var(--bg2); border:1px dashed rgba(255,140,90,.3); border-radius:18px; padding:20px 22px; color:var(--lead); font-size:15px; }
-  .how ol { margin:8px 0 0; padding-left:20px; } .how li { margin:4px 0; }
+  /* help */
+  .faq { max-width:760px; margin:0 auto; display:grid; gap:10px; }
+  .faq details { background:var(--card); border:1px solid var(--soft); border-radius:16px; padding:16px 20px; box-shadow:var(--shadow); }
+  .faq summary { cursor:pointer; font-weight:600; list-style:none; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary::after { content:"+"; float:right; color:var(--ember); font-weight:700; }
+  .faq details[open] summary::after { content:"\2212"; }
+  .faq p { margin:10px 0 0; color:var(--muted); font-size:15px; }
+  .help-cta { text-align:center; margin-top:24px; }
 
   /* download */
   .download { text-align:center; background:radial-gradient(ellipse at 50% 0%, rgba(255,90,60,.18), transparent 60%); }
@@ -145,7 +140,7 @@
     .heart-art { grid-row:1; width:min(260px, 70vw); }
     .hero .ecg { top:150px; }
     .stats, .steps { grid-template-columns:repeat(2,1fr); }
-    .features, .plans { grid-template-columns:1fr; }
+    .features { grid-template-columns:1fr; }
     nav .links a:not(.btn) { display:none; }
   }
 </style>
@@ -156,7 +151,7 @@
   <div class="wrap">
     <a class="brand" href="#"><img src="assets/icon-192.png" alt=""><span class="glow-text">HAKEEM</span></a>
     <div class="links">
-      <a href="#how">How it works</a><a href="#specialties">Specialties</a><a href="#pricing">Pricing</a>
+      <a href="#how">How it works</a><a href="#specialties">Specialties</a><a href="#help">Help</a>
       <button class="theme-btn" id="theme" type="button" aria-label="Switch between light and dark mode" title="Light / dark mode">
         <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -180,9 +175,9 @@
       <p class="lead">Manage real clinical cases from the first minute to the final diagnosis. Take the history, examine, stabilise, order tests and treat — then see exactly how well you did.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk">⬇ Download for Android</a>
-        <a class="btn btn-ghost" href="#pricing">See pricing</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
       </div>
-      <p class="note">Free to start · Android 8.0 or newer · Works offline · Main site: <a href="https://hakeemsim.com" style="color:var(--ember);font-weight:600">hakeemsim.com</a></p>
+      <p class="note">Android 8.0 or newer · Works offline · Download not starting? <a href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk" style="color:var(--ember);font-weight:600">GitHub mirror</a></p>
     </div>
     <img class="heart-art" src="assets/heart.webp" alt="Hakeem anatomical heart logo">
   </div>
@@ -190,9 +185,9 @@
 
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><b class="glow-text">130</b><span>interactive cases</span></div>
-    <div class="stat"><b class="glow-text">11</b><span>specialties</span></div>
-    <div class="stat"><b class="glow-text">130</b><span>review articles</span></div>
+    <div class="stat"><b class="glow-text" data-count="cases">257</b><span>interactive cases</span></div>
+    <div class="stat"><b class="glow-text" data-count="specialties">11</b><span>specialties</span></div>
+    <div class="stat"><b class="glow-text" data-count="articles">257</b><span>case articles</span></div>
     <div class="stat"><b class="glow-text">100%</b><span>offline after download</span></div>
   </div>
 </div>
@@ -213,12 +208,17 @@
   <div class="wrap">
     <div class="section-title"><h2>Cases across 11 specialties</h2><p>Based on published, open-access case reports. New cases are delivered from our server — no app update needed.</p></div>
     <div class="chips">
-      <span class="chip">Emergency<small>30</small></span><span class="chip">Cardiology<small>20</small></span>
-      <span class="chip">Internal Medicine<small>10</small></span><span class="chip">Surgery<small>10</small></span>
-      <span class="chip">Pediatrics<small>10</small></span><span class="chip">Obstetrics<small>10</small></span>
-      <span class="chip">Neurology<small>10</small></span><span class="chip">Critical Care<small>10</small></span>
-      <span class="chip">Oncology<small>10</small></span><span class="chip">Dermatology<small>5</small></span>
-      <span class="chip">Ophthalmology<small>5</small></span>
+      <span class="chip">Emergency<small data-spec="emergency">40</small></span>
+      <span class="chip">Cardiology<small data-spec="cardiology">30</small></span>
+      <span class="chip">Critical Care<small data-spec="critical">30</small></span>
+      <span class="chip">Internal Medicine<small data-spec="internal">19</small></span>
+      <span class="chip">Surgery<small data-spec="surgery">19</small></span>
+      <span class="chip">Pediatrics<small data-spec="pediatrics">20</small></span>
+      <span class="chip">Obstetrics<small data-spec="obstetrics">19</small></span>
+      <span class="chip">Neurology<small data-spec="neurology">20</small></span>
+      <span class="chip">Oncology<small data-spec="oncology">20</small></span>
+      <span class="chip">Dermatology<small data-spec="dermatology">20</small></span>
+      <span class="chip">Ophthalmology<small data-spec="ophthalmology">20</small></span>
     </div>
   </div>
 </section>
@@ -232,43 +232,24 @@
       <div class="feature">🖼️<h3>Clinical images</h3><p>ECGs, X-rays, scans and clinical photos from the original case reports.</p></div>
       <div class="feature">📶<h3>Works offline</h3><p>Cases are saved on your phone after the first download, so you can practise anywhere.</p></div>
       <div class="feature">🏅<h3>Levels &amp; badges</h3><p>Earn XP, climb from Medical Student to Attending, and see exactly what each badge needs.</p></div>
-      <div class="feature">🔔<h3>Always up to date</h3><p>New cases arrive automatically and the app tells you when a new version is ready.</p></div>
+      <div class="feature">📝<h3>Timed exams</h3><p>50-question exams at five difficulty levels, built from the cases and articles, with the correct answers at the end.</p></div>
+      <div class="feature">🔔<h3>Always up to date</h3><p>New cases arrive automatically with a notice of what was added, and the app tells you when a new version is ready.</p></div>
     </div>
   </div>
 </section>
 
-<section id="pricing">
+<section id="help">
   <div class="wrap">
-    <div class="section-title"><h2>Simple pricing</h2><p>Start free. Upgrade to unlock every case and article.</p></div>
-    <div class="plans">
-      <div class="plan">
-        <h3>Free</h3>
-        <div class="price">0 <small>forever</small></div>
-        <div class="alt">&nbsp;</div>
-        <ul><li>One full case in every specialty</li><li>Scoring and feedback</li><li>Works offline</li></ul>
-        <a class="btn btn-ghost" href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk">Download</a>
-      </div>
-      <div class="plan">
-        <h3>Monthly</h3>
-        <div class="price">60,000 <small>SDG / month</small></div>
-        <div class="alt">or 6 USDT</div>
-        <ul><li>All 130 cases and new cases as they arrive</li><li>Full articles library</li><li>Levels, badges and progress tracking</li></ul>
-        <a class="btn btn-ghost" href="https://wa.me/249910981837?text=Hello%2C%20I%20would%20like%20the%20Hakeem%20monthly%20plan.">Subscribe on WhatsApp</a>
-      </div>
-      <div class="plan best">
-        <span class="badge">BEST VALUE · SAVE 17%</span>
-        <h3>Yearly</h3>
-        <div class="price">599,000 <small>SDG / year</small></div>
-        <div class="alt">or 59.9 USDT</div>
-        <ul><li>Everything in Monthly</li><li>Two months free compared with monthly</li><li>Priority support</li></ul>
-        <a class="btn btn-primary" href="https://wa.me/249910981837?text=Hello%2C%20I%20would%20like%20the%20Hakeem%20yearly%20plan.">Subscribe on WhatsApp</a>
-      </div>
+    <div class="section-title"><h2>Help &amp; questions</h2><p>Quick answers about installing and using Hakeem.</p></div>
+    <div class="faq">
+      <details><summary>How do I install the app?</summary><p>Tap <b>Download APK</b> below. When Android asks, allow installing apps from your browser, then open the file. If the download does not start, use the GitHub mirror.</p></details>
+      <details><summary>Does it work without internet?</summary><p>Yes. Connect once so the app can download the cases and articles; after that you can practise offline. Connect again from time to time to receive new cases.</p></details>
+      <details><summary>How do I get new cases?</summary><p>New cases are added from our server regularly. The app shows a message listing how many were added in each specialty &mdash; no reinstall needed.</p></details>
+      <details><summary>How do updates work?</summary><p>When a new version is released the app shows an update notice at start-up. You can choose <b>Later</b>, but each version becomes required 7 days after release. Updating keeps your progress.</p></details>
+      <details><summary>Will I lose my progress if I change phones?</summary><p>Progress is saved on your phone. Contact us before changing phones and we will help you move what you can.</p></details>
+      <details><summary>The site or download does not open on my network</summary><p>Some networks block our site. Use the GitHub mirror link on this page, or try another network.</p></details>
     </div>
-    <div class="how"><b>How to subscribe</b>
-      <ol><li>Download the app and try the free cases.</li>
-      <li>Message us on WhatsApp with the plan you want and pay in SDG or USDT.</li>
-      <li>You receive an activation key — enter it in the app and everything unlocks.</li></ol>
-    </div>
+    <div class="help-cta"><a class="btn btn-ghost" href="https://wa.me/249910981837">💬 Ask us on WhatsApp</a></div>
   </div>
 </section>
 
@@ -279,9 +260,9 @@
     <p style="color:var(--muted);margin:0 0 24px">Download the APK directly from our server. iPhone version coming later.</p>
     <div class="cta" style="justify-content:center">
       <a class="btn btn-primary" href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk">⬇ Download APK</a>
-      <a class="btn btn-ghost" href="https://hakeemsim.com/download">Main download page</a>
+      <a class="btn btn-ghost" href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk">⬇ GitHub mirror</a>
     </div>
-    <p class="note">If Android asks, allow installing apps from this source. Updates keep your licence and progress.</p>
+    <p class="note">If Android asks, allow installing apps from this source. Updates keep your progress.</p>
   </div>
 </section>
 
@@ -303,6 +284,24 @@
     document.getElementById('theme').addEventListener('click', function () { apply(!h.classList.contains('light'), true); });
     if (window.matchMedia) matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
       var saved = null; try { saved = localStorage.getItem('hk_theme'); } catch (x) { } if (!saved) apply(e.matches, false); });
+  })();
+  // Case and article numbers come from the live content index, so they stay current as cases are added.
+  (function () {
+    var bases = ['https://hakeemsim.com/v1/', 'https://medsim-content.hagoalomadah747.workers.dev/v1/'];
+    function set(sel, v) { document.querySelectorAll(sel).forEach(function (el) { el.textContent = v; }); }
+    function tryBase(i) {
+      if (i >= bases.length || !window.fetch) return;
+      var ctl = window.AbortController ? new AbortController() : null;
+      if (ctl) setTimeout(function () { ctl.abort(); }, 6000);
+      fetch(bases[i] + 'index.json', { cache: 'no-cache', signal: ctl ? ctl.signal : undefined }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+        var per = {}; (d.cases || []).forEach(function (c) { per[c.specialty] = (per[c.specialty] || 0) + 1; });
+        set('[data-count="cases"]', (d.cases || []).length);
+        set('[data-count="articles"]', (d.articles || []).length);
+        set('[data-count="specialties"]', Object.keys(per).length);
+        Object.keys(per).forEach(function (k) { set('[data-spec="' + k + '"]', per[k]); });
+      }).catch(function () { tryBase(i + 1); });
+    }
+    tryBase(0);
   })();
 </script>
 </body>
