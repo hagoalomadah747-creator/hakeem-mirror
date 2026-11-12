@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hakeem — Clinical Case Simulator</title>
 <meta name="description" content="Hakeem is an interactive clinical case simulator for medical students and doctors: take the history, examine, stabilise, order tests, treat and make the diagnosis — then get scored.">
-<meta name="theme-color" content="#0d1230">
+<meta name="theme-color" content="#faf6f2">
 <meta property="og:title" content="Hakeem — Clinical Case Simulator">
 <meta property="og:description" content="Over 250 interactive clinical cases across 11 specialties, with an article for every case. Practise real decisions, get instant feedback.">
 <meta property="og:image" content="https://hakeemsim.com/assets/icon-512.png">
 <script>
   (function () { var t = null; try { t = localStorage.getItem('hk_theme'); } catch (e) { }
-    var light = t ? t === 'light' : !!(window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches);
+    var light = t ? t === 'light' : true; // light is the default
     document.documentElement.classList.add(light ? 'light' : 'dark'); })();
 </script>
 <link rel="canonical" href="https://hakeemsim.com/">
@@ -283,8 +283,6 @@
       if (save) { try { localStorage.setItem('hk_theme', light ? 'light' : 'dark'); } catch (e) { } } }
     apply(h.classList.contains('light'), false);
     document.getElementById('theme').addEventListener('click', function () { apply(!h.classList.contains('light'), true); });
-    if (window.matchMedia) matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
-      var saved = null; try { saved = localStorage.getItem('hk_theme'); } catch (x) { } if (!saved) apply(e.matches, false); });
   })();
   // Case and article numbers come from the live content index, so they stay current as cases are added.
   (function () {

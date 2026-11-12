@@ -1,5 +1,4 @@
 :root { color-scheme: light dark; --bg:#faf6f2; --card:#fff; --ink:#1a1430; --muted:#5c566e; --ember:#e25824; --line:rgba(26,20,48,.12); }
-@media (prefers-color-scheme: dark) { :root { --bg:#0b0f26; --card:#161d42; --ink:#f5f2f0; --muted:#a9aecb; --ember:#ff7a3d; --line:rgba(255,255,255,.12); } }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 header, main, footer { max-width:760px; margin:0 auto; padding:0 20px; }
