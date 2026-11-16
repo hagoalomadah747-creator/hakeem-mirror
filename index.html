@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+  // Opened from the Hakeem app (?app=1, kept for this visit): no APK downloads on the page (Google Play policy).
+  try { if (/[?&]app=1(&|$)/.test(location.search)) sessionStorage.setItem('hk_app', '1'); if (sessionStorage.getItem('hk_app') === '1') document.documentElement.classList.add('in-app'); } catch (e) { if (/[?&]app=1(&|$)/.test(location.search)) document.documentElement.classList.add('in-app'); }
+</script>
+<style>
+  .in-app #download, .in-app a[href^="/download"], .in-app a[href$=".apk"], .in-app a[href="#download"], .in-app .dl-only { display:none !important; }
+</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Hakeem — Clinical Case Simulator</title>
 <meta name="description" content="Hakeem is an interactive clinical case simulator for medical students and doctors: take the history, examine, stabilise, order tests, treat and make the diagnosis — then get scored.">
 <meta name="theme-color" content="#faf6f2">
 <meta property="og:title" content="Hakeem — Clinical Case Simulator">
-<meta property="og:description" content="Over 250 interactive clinical cases across 11 specialties, with an article for every case. Practise real decisions, get instant feedback.">
+<meta property="og:description" content="Over 300 interactive clinical cases across 11 specialties, with an article for every case. Practise real decisions, get instant feedback.">
 <meta property="og:image" content="https://hakeemsim.com/assets/icon-512.png">
 <script>
   (function () { var t = null; try { t = localStorage.getItem('hk_theme'); } catch (e) { }
@@ -116,6 +123,28 @@
   .feature { background:var(--card); border:1px solid var(--soft); border-radius:18px; padding:22px; box-shadow:var(--shadow); }
   .feature h3 { margin:8px 0 6px; font-size:17px; font-weight:600; } .feature p { margin:0; color:var(--muted); font-size:14.5px; }
 
+  /* characters: Dr. Hakeem & Nurse Salma (fictional) */
+  .hero-art { position:relative; justify-self:center; width:min(420px, 86vw); aspect-ratio:1/1.05; }
+  .hero-art .heart-art { position:absolute; left:0; top:4%; width:72%; }
+  .hero-art .hero-char { position:absolute; right:2%; bottom:0; height:100%; width:auto; filter:drop-shadow(0 18px 24px rgba(26,20,48,.22)); }
+  .hero-art::after { content:""; position:absolute; right:6%; bottom:-6px; width:46%; height:22px; border-radius:50%; background:radial-gradient(closest-side, rgba(26,20,48,.18), transparent); }
+  html.dark .hero-art::after { background:radial-gradient(closest-side, rgba(0,0,0,.45), transparent); }
+  .team { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; max-width:900px; margin:0 auto; }
+  .member { display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:end; background:linear-gradient(180deg,var(--card),var(--bg2));
+            border:1px solid var(--line); border-radius:22px; padding:22px 22px 0 14px; box-shadow:var(--shadow); overflow:hidden; }
+  .member img { width:100%; height:auto; max-height:300px; object-fit:contain; object-position:bottom; display:block; }
+  .member .bio { padding-bottom:22px; align-self:center; }
+  .member h3 { margin:0 0 2px; font-size:21px; font-weight:600; }
+  .member .role { display:inline-block; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--amber); margin-bottom:8px; }
+  .member p { margin:0; color:var(--muted); font-size:14.5px; }
+  .team-note { text-align:center; color:var(--fine); font-size:13px; margin:18px 0 0; }
+  .download .dl-art { display:flex; align-items:flex-end; justify-content:center; gap:16px; }
+  .download .dl-char { height:150px; width:auto; border-radius:0; box-shadow:none; filter:drop-shadow(0 10px 16px rgba(26,20,48,.2)); }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-char { animation:rise .7s ease-out both; }
+    @keyframes rise { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  }
+
   /* help */
   .faq { max-width:760px; margin:0 auto; display:grid; gap:10px; }
   .faq details { background:var(--card); border:1px solid var(--soft); border-radius:16px; padding:16px 20px; box-shadow:var(--shadow); }
@@ -138,11 +167,32 @@
     .hero .wrap { grid-template-columns:1fr; text-align:center; padding-top:40px; }
     .hero p.lead { margin-left:auto; margin-right:auto; } .cta { justify-content:center; }
     .heart-art { grid-row:1; width:min(260px, 70vw); }
+    .hero-art { grid-row:1; width:min(300px, 78vw); }
+    .hero-art .heart-art { width:72%; }
+    .team { grid-template-columns:1fr; }
+    .member { grid-template-columns:110px 1fr; }
     .hero .ecg { top:150px; }
     .stats, .steps { grid-template-columns:repeat(2,1fr); }
     .features { grid-template-columns:1fr; }
     nav .links a:not(.btn) { display:none; }
   }
+
+  /* free trial access code */
+  .trial-bar { display:none; margin:14px 0 0; }
+  .trial-on .trial-bar { display:block; }
+  .trial-modal { position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center; padding:16px; background:rgba(10,8,24,.6); }
+  .trial-modal.open { display:flex; }
+  .trial-box { width:100%; max-width:420px; background:var(--card); color:var(--ink); border:1px solid var(--soft2); border-radius:20px; padding:24px; box-shadow:0 20px 60px rgba(0,0,0,.35); position:relative; }
+  .trial-box h3 { margin:0 0 6px; font-size:22px; }
+  .trial-box p { margin:0 0 14px; color:var(--muted); font-size:14px; }
+  .trial-box input { width:100%; font:inherit; font-size:16px; padding:12px 14px; border-radius:12px; border:1px solid var(--soft2); background:var(--bg); color:var(--ink); margin:0 0 12px; }
+  .trial-box .btn { width:100%; padding:13px 18px; border:0; cursor:pointer; font:inherit; font-weight:600; }
+  .trial-box .x { position:absolute; top:10px; right:12px; background:none; border:0; font-size:24px; color:var(--muted); cursor:pointer; }
+  .trial-msg { min-height:20px; font-size:14px; margin:4px 0 0; }
+  .trial-msg.err { color:var(--rose); } .trial-msg.ok { color:#16a34a; }
+  .trial-key { font-family:ui-monospace,Consolas,monospace; font-size:18px; font-weight:700; text-align:center; padding:14px; border-radius:12px; background:var(--bg2); border:1px dashed var(--ember); word-break:break-all; margin:0 0 12px; user-select:all; }
+  .trial-step { display:none; } .trial-step.on { display:block; }
+  .trial-fine { font-size:12px !important; margin:12px 0 0 !important; }
 </style>
 </head>
 <body>
@@ -177,17 +227,21 @@
         <a class="btn btn-primary" href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk">⬇ Download for Android</a>
         <a class="btn btn-ghost" href="#how">How it works</a>
       </div>
-      <p class="note">Android 8.0 or newer · Works offline · Download not starting? <a href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk" style="color:var(--ember);font-weight:600">GitHub mirror</a></p>
+      <div class="trial-bar"><button class="btn btn-ghost" type="button" onclick="Trial.open()">🔑 Get a free access code</button></div>
+      <p class="note dl-only">Android 8.0 or newer · Works offline · Download not starting? <a href="https://github.com/hagoalomadah747-creator/hakeem-mirror/releases/latest/download/Hakeem.apk" style="color:var(--ember);font-weight:600">GitHub mirror</a></p>
     </div>
-    <img class="heart-art" src="assets/heart.webp" alt="Hakeem anatomical heart logo">
+    <div class="hero-art">
+      <img class="heart-art" src="assets/heart.webp" alt="Hakeem anatomical heart logo">
+      <img class="hero-char" src="assets/characters/hakeem-waving.webp" width="283" height="760" alt="Dr. Hakeem, the app's cartoon doctor, waving">
+    </div>
   </div>
 </header>
 
 <div class="wrap">
   <div class="stats">
-    <div class="stat"><b class="glow-text" data-count="cases">257</b><span>interactive cases</span></div>
+    <div class="stat"><b class="glow-text" data-count="cases">307</b><span>interactive cases</span></div>
     <div class="stat"><b class="glow-text" data-count="specialties">11</b><span>specialties</span></div>
-    <div class="stat"><b class="glow-text" data-count="articles">257</b><span>case articles</span></div>
+    <div class="stat"><b class="glow-text" data-count="articles">307</b><span>case articles</span></div>
     <div class="stat"><b class="glow-text">100%</b><span>offline after download</span></div>
   </div>
 </div>
@@ -204,21 +258,38 @@
   </div>
 </section>
 
+<section id="team" style="padding-top:10px">
+  <div class="wrap">
+    <div class="section-title"><h2>Meet Dr. Hakeem &amp; Nurse Salma</h2><p>The faces of our case challenges and reels.</p></div>
+    <div class="team">
+      <div class="member">
+        <img src="assets/characters/hakeem-explaining.webp" width="268" height="760" loading="lazy" alt="Dr. Hakeem explaining">
+        <div class="bio"><span class="role">Your senior</span><h3>Dr. Hakeem</h3><p>Asks the questions a good senior would ask, pushes you to commit to a diagnosis, then shares the clinical pearl.</p></div>
+      </div>
+      <div class="member">
+        <img src="assets/characters/salma-thumbs-up.webp" width="247" height="760" loading="lazy" alt="Nurse Salma giving a thumbs up">
+        <div class="bio"><span class="role">Your nurse</span><h3>Nurse Salma</h3><p>Reports the vitals, reminds you what is still pending, and cheers you on when you get it right.</p></div>
+      </div>
+    </div>
+    <p class="team-note">Dr. Hakeem and Nurse Salma are fictional characters, not real healthcare workers.</p>
+  </div>
+</section>
+
 <section id="specialties" style="padding-top:20px">
   <div class="wrap">
     <div class="section-title"><h2>Cases across 11 specialties</h2><p>Based on published, open-access case reports. New cases are delivered from our server — no app update needed.</p></div>
     <div class="chips">
-      <span class="chip">Emergency<small data-spec="emergency">40</small></span>
-      <span class="chip">Cardiology<small data-spec="cardiology">30</small></span>
+      <span class="chip">Emergency<small data-spec="emergency">46</small></span>
+      <span class="chip">Cardiology<small data-spec="cardiology">32</small></span>
       <span class="chip">Critical Care<small data-spec="critical">30</small></span>
-      <span class="chip">Internal Medicine<small data-spec="internal">19</small></span>
-      <span class="chip">Surgery<small data-spec="surgery">19</small></span>
-      <span class="chip">Pediatrics<small data-spec="pediatrics">20</small></span>
-      <span class="chip">Obstetrics<small data-spec="obstetrics">19</small></span>
-      <span class="chip">Neurology<small data-spec="neurology">20</small></span>
-      <span class="chip">Oncology<small data-spec="oncology">20</small></span>
-      <span class="chip">Dermatology<small data-spec="dermatology">20</small></span>
-      <span class="chip">Ophthalmology<small data-spec="ophthalmology">20</small></span>
+      <span class="chip">Internal Medicine<small data-spec="internal">29</small></span>
+      <span class="chip">Surgery<small data-spec="surgery">25</small></span>
+      <span class="chip">Pediatrics<small data-spec="pediatrics">32</small></span>
+      <span class="chip">Obstetrics<small data-spec="obstetrics">25</small></span>
+      <span class="chip">Neurology<small data-spec="neurology">23</small></span>
+      <span class="chip">Oncology<small data-spec="oncology">22</small></span>
+      <span class="chip">Dermatology<small data-spec="dermatology">21</small></span>
+      <span class="chip">Ophthalmology<small data-spec="ophthalmology">22</small></span>
     </div>
   </div>
 </section>
@@ -242,12 +313,12 @@
   <div class="wrap">
     <div class="section-title"><h2>Help &amp; questions</h2><p>Quick answers about installing and using Hakeem.</p></div>
     <div class="faq">
-      <details><summary>How do I install the app?</summary><p>Tap <b>Download APK</b> below. When Android asks, allow installing apps from your browser, then open the file. If the download does not start, use the GitHub mirror.</p></details>
+      <details class="dl-only"><summary>How do I install the app?</summary><p>Tap <b>Download APK</b> below. When Android asks, allow installing apps from your browser, then open the file. If the download does not start, use the GitHub mirror.</p></details>
       <details><summary>Does it work without internet?</summary><p>Yes. Connect once so the app can download the cases and articles; after that you can practise offline. Connect again from time to time to receive new cases.</p></details>
       <details><summary>How do I get new cases?</summary><p>New cases are added from our server regularly. The app shows a message listing how many were added in each specialty &mdash; no reinstall needed.</p></details>
       <details><summary>How do updates work?</summary><p>When a new version is released the app shows an update notice at start-up. You can choose <b>Later</b>, but each version becomes required 7 days after release. Updating keeps your progress.</p></details>
       <details><summary>Will I lose my progress if I change phones?</summary><p>Progress is saved on your phone. Contact us before changing phones and we will help you move what you can.</p></details>
-      <details><summary>The site or download does not open on my network</summary><p>Some networks block our site. Use the GitHub mirror link on this page, or try another network.</p></details>
+      <details class="dl-only"><summary>The site or download does not open on my network</summary><p>Some networks block our site. Use the GitHub mirror link on this page, or try another network.</p></details>
     </div>
     <div class="help-cta"><a class="btn btn-ghost" href="https://wa.me/249910981837">💬 Ask us on WhatsApp</a></div>
   </div>
@@ -255,7 +326,10 @@
 
 <section id="download" class="download">
   <div class="wrap">
-    <img src="assets/icon-512.png" alt="Hakeem app icon">
+    <div class="dl-art">
+      <img src="assets/icon-512.png" alt="Hakeem app icon">
+      <img class="dl-char" src="assets/characters/salma-phone.webp" width="278" height="760" loading="lazy" alt="Nurse Salma holding a phone">
+    </div>
     <h2 style="font-size:32px;margin:18px 0 6px;font-weight:600">Get Hakeem for Android</h2>
     <p style="color:var(--muted);margin:0 0 24px">Download the APK directly from our server. iPhone version coming later.</p>
     <div class="cta" style="justify-content:center">
@@ -302,6 +376,91 @@
     }
     tryBase(0);
   })();
+</script>
+
+<div class="trial-modal" id="trial-modal" role="dialog" aria-modal="true" aria-labelledby="trial-title" onclick="if (event.target === this) Trial.close()">
+  <div class="trial-box">
+    <button class="x" type="button" aria-label="Close" onclick="Trial.close()">×</button>
+    <div class="trial-step on" id="trial-s1">
+      <h3 id="trial-title">Free access code</h3>
+      <p>Try every case, article and exam free during our trial period, until <b id="trial-until">20 December 2026</b>. Enter your email and we will send you a confirmation code.</p>
+      <input id="trial-email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+      <button class="btn btn-primary" type="button" id="trial-send" onclick="Trial.start()">Send confirmation code</button>
+      <p class="trial-fine">We keep your email to send the code and to tell you about Hakeem news and the end of the trial. See our <a href="privacy.html#trial">privacy policy</a>.</p>
+    </div>
+    <div class="trial-step" id="trial-s2">
+      <h3>Check your email</h3>
+      <p>We sent a 6-digit code to <b id="trial-to"></b>. It expires in 10 minutes. Check your spam folder if you do not see it.</p>
+      <input id="trial-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+      <button class="btn btn-primary" type="button" id="trial-check" onclick="Trial.verify()">Confirm</button>
+      <p class="trial-fine"><a href="#" onclick="Trial.step(1); return false;">Use another email</a></p>
+    </div>
+    <div class="trial-step" id="trial-s3">
+      <h3>Your access code</h3>
+      <div class="trial-key" id="trial-key"></div>
+      <button class="btn btn-ghost" type="button" onclick="Trial.copy()">Copy code</button>
+      <p class="trial-fine">Works until <b id="trial-end"></b>. Open the Hakeem app, go to <b>Home &rsaquo; Enter access code</b> and tap <b>Activate</b>. We also sent the code to your email.</p>
+    </div>
+    <p class="trial-msg" id="trial-msg" aria-live="polite"></p>
+  </div>
+</div>
+<script>
+  // Free trial access code: email -> confirmation code -> shared trial code (/api/trial/*, site-worker/trial.js).
+  window.Trial = (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    var email = '';
+    function msg(t, kind) { var m = $('trial-msg'); m.textContent = t || ''; m.className = 'trial-msg' + (kind ? ' ' + kind : ''); }
+    function step(n) { [1, 2, 3].forEach(function (i) { $('trial-s' + i).classList.toggle('on', i === n); }); msg(''); }
+    function post(path, body) {
+      return fetch('/api/trial/' + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+        .catch(function () { return { ok: false, message: 'No connection. Please try again.' }; });
+    }
+    function busy(id, on, text) { var b = $(id); b.disabled = on; if (text) b.textContent = text; }
+    return {
+      step: step,
+      open: function () { step(1); $('trial-modal').classList.add('open'); setTimeout(function () { $('trial-email').focus(); }, 50); },
+      close: function () { $('trial-modal').classList.remove('open'); },
+      start: function () {
+        email = ($('trial-email').value || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg('Please enter a valid email address.', 'err'); return; }
+        busy('trial-send', true, 'Sending…');
+        post('start', { email: email }).then(function (r) {
+          busy('trial-send', false, 'Send confirmation code');
+          if (!r.ok) { msg(r.message || 'Something went wrong. Please try again.', 'err'); return; }
+          $('trial-to').textContent = email; step(2); $('trial-code').value = ''; $('trial-code').focus();
+        });
+      },
+      verify: function () {
+        var code = ($('trial-code').value || '').replace(/\D/g, '');
+        if (code.length !== 6) { msg('Enter the 6-digit code from the email.', 'err'); return; }
+        busy('trial-check', true, 'Checking…');
+        post('verify', { email: email, code: code }).then(function (r) {
+          busy('trial-check', false, 'Confirm');
+          if (!r.ok) { msg(r.message || 'Something went wrong. Please try again.', 'err'); return; }
+          $('trial-key').textContent = r.key; $('trial-end').textContent = r.until; step(3);
+        });
+      },
+      copy: function () {
+        var k = $('trial-key').textContent;
+        (navigator.clipboard ? navigator.clipboard.writeText(k) : Promise.reject()).then(function () { msg('Copied.', 'ok'); }, function () { msg('Select the code and copy it.', ''); });
+      }
+    };
+  })();
+  // Show the button only while the trial is open.
+  fetch('/api/trial/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.open) return;
+    document.documentElement.classList.add('trial-on');
+    var u = new Date(d.until + 'T00:00:00Z');
+    document.getElementById('trial-until').textContent = u.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+  }).catch(function () { });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') Trial.close();
+    if (e.key === 'Enter' && document.getElementById('trial-modal').classList.contains('open')) {
+      if (document.getElementById('trial-s1').classList.contains('on')) Trial.start();
+      else if (document.getElementById('trial-s2').classList.contains('on')) Trial.verify();
+    }
+  });
 </script>
 </body>
 </html>
