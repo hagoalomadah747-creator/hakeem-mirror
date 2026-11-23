@@ -12,7 +12,7 @@
 <header><a class="brand" href="./"><img src="assets/icon-192.png" alt=""> HAKEEM</a></header>
 <main>
 <h1>Privacy Policy</h1>
-<p class="muted">Last updated: 17 November 2026</p>
+<p class="muted">Last updated: 18 November 2026</p>
 
 <p>Hakeem ("the app") is an educational clinical case simulator for medical students and healthcare professionals.
 This policy explains what data the app uses, why, and the choices you have. Section 10 covers our Facebook Page assistant and section 11 the free trial access code on our website. We keep data collection to the minimum
@@ -26,7 +26,7 @@ the app needs to work.</p>
 </ul>
 
 <h2>2. Data that stays on your phone</h2>
-<p>The following is stored only on your device and is never sent to us:</p>
+<p>The following is stored only on your device and is never sent to us, unless you turn on "Back up &amp; restore progress" (section 3b):</p>
 <ul>
 <li>The name and photo you may add to the Home card (optional).</li>
 <li>Your case results, scores, exam history, levels and badges.</li>
@@ -51,7 +51,8 @@ after it ends, to resolve support requests. If you do not enter an access code, 
 <p>When the app is first opened without an access code, it starts a free 7-day trial. To do this the app sends our
 content server the same one-way device identifier described in section 3 (a hash of the Android ID for this app).
 We store it with the date the trial started, so that reinstalling the app on the same phone does not restart the
-trial. It is not linked to your name, email or any other data.</p>
+trial. It is not linked to your name, email or any other data. It is kept for one year from the start of the trial, then
+deleted automatically. To protect the service from abuse, the number of new trials from one internet address is limited.</p>
 
 <h2 id="backup">3b. Back up &amp; restore progress (optional)</h2>
 <p>If you choose to back up your progress, the app sends our server the email address you enter (to send you a
@@ -111,7 +112,9 @@ that drafts posts and replies to comments on our Page.</p>
 <li>To read and reply to comments and messages on our Page (publicly or privately).</li>
 <li>To keep a short history so we do not reply to the same comment twice, and to limit spam.</li>
 </ul>
-<p>A language model (Anthropic Claude) helps draft replies. Your comment text is sent to it only to write the reply.
+<p>A language model helps draft replies. Your comment text is sent to it only to write the reply, through OpenRouter
+(which passes it to the model provider, such as Anthropic Claude) or Google Gemini; these providers process it on our
+behalf and do not use it for advertising.
 Replies on sensitive topics are reviewed by a person before they are sent.</p>
 <h3>What we never do</h3>
 <ul>
